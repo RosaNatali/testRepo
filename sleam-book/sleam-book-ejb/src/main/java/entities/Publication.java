@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -18,6 +20,7 @@ import javax.persistence.OneToMany;
 public class Publication implements Serializable {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String title;
 
@@ -34,6 +37,11 @@ public class Publication implements Serializable {
 
 	public Publication() {
 		super();
+	}
+
+	public Publication(String title) {
+		super();
+		this.title = title;
 	}
 
 	public Integer getId() {

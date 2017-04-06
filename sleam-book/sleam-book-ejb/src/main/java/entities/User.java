@@ -3,6 +3,7 @@ package entities;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
@@ -27,7 +28,7 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "user")
 	private List<Review> reviews;
 
-	@OneToMany(mappedBy = "owner")
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.MERGE)
 	private List<Publication> publications;
 
 	@ManyToMany
@@ -133,4 +134,10 @@ public class User implements Serializable {
 		this.comments = comments;
 	}
 
+	public void linkPublicationsToThisUser(List<Publication> publications) {
+		this.publications = publications;
+		for (Publication p : publications) {
+			p.setOwner(this);
+		}
+	}
 }
