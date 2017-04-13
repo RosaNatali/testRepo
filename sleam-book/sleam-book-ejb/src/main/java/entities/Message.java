@@ -31,6 +31,14 @@ public class Message implements Serializable {
 	public Message() {
 	}
 
+	public Message(String content, User sender, User reciver) {
+		super();
+		this.id = new MessageId(sender.getId(), reciver.getId());
+		this.content = content;
+		this.sender = sender;
+		this.reciver = reciver;
+	}
+
 	public String getContent() {
 		return this.content;
 	}

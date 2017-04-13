@@ -7,7 +7,10 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import entities.GroupOfSleamBooker;
+import entities.Message;
 import entities.Publication;
+import entities.ReviewType;
 import entities.User;
 
 /**
@@ -94,6 +97,52 @@ public class UserManagement implements UserManagementRemote, UserManagementLocal
 			}
 		}
 		return publications;
+	}
+
+	@Override
+	public void addFriend(User me, User friend) {
+		me.getFriends().add(friend);
+		entityManager.merge(me);
+	}
+
+	@Override
+	public void addGroup(GroupOfSleamBooker group) {
+		entityManager.persist(group);
+	}
+
+	@Override
+	public void sendMessage(User sender, User receiver, String messageText) {
+		Message message = new Message(messageText, sender, receiver);
+		entityManager.persist(message);
+	}
+
+	@Override
+	public void commentPublication(User user, Publication publication, String comment) {
+			
+	}
+
+	@Override
+	public void reviewPublication(User user, Publication publication, ReviewType reviewType) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void subscribeToGroup(User user, GroupOfSleamBooker groupOfSleamBooker) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void sharePublication(User user, Publication publication) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public User login(String username, String password) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
