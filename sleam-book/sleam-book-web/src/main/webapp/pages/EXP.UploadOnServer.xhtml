@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"  
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui">
+	
+	<h:head>
+		<title>SLEAM-BOOK | ESPRIT</title>
+		<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+		<h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head" />
+	</h:head>
+	<h:body>
+		
+				
+		
+		**************************************************************
+	    <form method="post" action="UploadServlet"
+			  enctype="multipart/form-data">
+			Select file to upload: <input type="file" name="file" size="60" /><br />
+			<br /> <input type="submit" value="Upload" />
+			<br/><br/>
+		</form>
+		
+		**************************************************************
+		<br/>
+		
+		<h:form>
+		***** I0
+		<p:graphicImage value="#{userBean.image}" width="50" height="50">
+			<f:param name="filename" value="oo.jpg" />
+		</p:graphicImage>
+		<br/>
+		*************************************************************************************** I1
+		<p:graphicImage value="#{userBean.imageee}" width="50" height="50">
+		</p:graphicImage>
+		<br/>
+		***** I2
+		<p:graphicImage value="#{userBean.imagechj}" width="50" height="50">
+	    </p:graphicImage>
+		<br/>
+		***** I3
+		<p:graphicImage value="#{userBean.imagechj}" width="50" height="50">
+	    	<f:param name="filename" value="MarcelHirscher.jpg" />
+		</p:graphicImage>
+		<br/>
+		***** I4
+		<p:graphicImage value="#{userBean.newImage}" width="50" height="50">
+		</p:graphicImage>
+		<br/>
+		***** I5
+		<p:graphicImage value="#{userBean.newImage1}" width="50" height="50">
+		</p:graphicImage>
+	</h:form>
+	    
+		**************************************************************
+		
+		
+				
+			
+	</h:body>
+</html>

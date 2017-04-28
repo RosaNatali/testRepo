@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"  
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui">
+	
+	<h:head>
+		<title>SLEAM-BOOK | ESPRIT</title>
+		<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+		<h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head" />
+	</h:head>
+	<h:body>
+		<ui:composition template="/templates/indexTemplate1.xhtml"
+						xmlns:p="http://primefaces.org/ui">
+						
+			<ui:define name="content">
+				<f:view encoding="UTF-8" contentType="text/html">
+					<style>
+						.outputTooltip {
+							color: #2F3030;
+							font-family: Arial;
+							font-size: 10px;
+							font-weight: bold;
+						}
+					</style>
+<h:form id="form">
+    <p:growl id="msgs" showDetail="true" />
+ 
+    <p:dataTable id="multipleDT" var="car" value="#{dtSelectionView.cars4}" selectionMode="multiple" selection="#{dtSelectionView.selectedCars}" rowKey="#{car.id}">
+        
+        <p:ajax event="rowSelect" oncomplete="PF('multiCarDialog').show()" update="@([id$=multiCarDetail])" />
+        <f:facet name="header">
+            Multiple with Meta and Shift keys
+            </f:facet>
+        <p:column headerText="Id">
+            <h:outputText value="#{car.id}" />
+        </p:column>
+        <p:column headerText="Year">
+            <h:outputText value="#{car.year}" />
+        </p:column>
+        <p:column headerText="Brand">
+            <h:outputText value="#{car.brand}" />
+        </p:column>
+        <p:column headerText="Color">
+            <h:outputText value="#{car.color}" />
+        </p:column>
+        
+    </p:dataTable>
+ 
+    <p:dialog header="Selected Cars" widgetVar="multiCarDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="200">
+        <p:outputPanel id="multiCarDetail" style="text-align:center;">
+            <ui:repeat value="#{dtSelectionView.selectedCars}" var="car">
+                <h:outputText value="#{car.id} - #{car.brand}" style="display:block"/>
+            </ui:repeat>
+        </p:outputPanel>
+    </p:dialog>
+</h:form>
+				</f:view>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

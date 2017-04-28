@@ -10,7 +10,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-
+@DiscriminatorValue("00")
 public class Media extends Publication implements Serializable {
 
 	

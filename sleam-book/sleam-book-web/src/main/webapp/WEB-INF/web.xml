@@ -8,6 +8,30 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*.jsf</url-pattern>
+    <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
-</web-app>
+  
+  <servlet>
+    <description></description>
+    <display-name>pages/DisplayImage</display-name>
+    <servlet-name>DisplayImage</servlet-name>
+    <servlet-class>com.esprit.utils.DisplayImage</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>DisplayImage</servlet-name>
+    <url-pattern>/pages/DisplayImage</url-pattern>
+</servlet-mapping>
+  
+  
+  <servlet>
+    <description></description>
+    <display-name>pages/DisplayPhoto</display-name>
+    <servlet-name>DisplayPhoto</servlet-name>
+    <servlet-class>com.esprit.utils.DisplayPhoto</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>DisplayPhoto</servlet-name>
+    <url-pattern>/pages/DisplayPhoto</url-pattern>
+</servlet-mapping>
+  
+  </web-app>

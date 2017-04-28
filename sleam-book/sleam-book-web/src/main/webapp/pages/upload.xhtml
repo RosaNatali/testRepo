@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<body> 
+<center>
+	<h1>File Upload</h1>jj
+	<h:form>
+		<p:graphicImage value="#{userBean.imageee}">
+		</p:graphicImage>
+		*****
+		<p:graphicImage value="#{userBean.image}">
+	    	<f:param name="filename" value="ss.jpg" />
+		</p:graphicImage>
+	
+	<form method="post" action="UploadServlet"
+		enctype="multipart/form-data">
+		Select file to upload: <input type="file" name="file" size="60" /><br />
+		<br /> <input type="submit" value="Upload" />
+		<br/><br/>
+		<h:graphicImage url="C:/Users/SARSOURA/Pictures/ss.jpg"/>
+		<p:graphicImage value="/resources/icons/send.ico" style="width : 27px; height:27px" />
+											
+	</form>
+	</h:form>
+</center>
+</body> 
+</html>

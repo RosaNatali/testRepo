@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Remote;
 
 import entities.GroupOfSleamBooker;
+import entities.Photo;
 import entities.Publication;
 import entities.ReviewType;
 import entities.User;
@@ -22,6 +23,8 @@ public interface UserManagementRemote {
 	void deleteUser(User user);
 
 	void createPublicationByUser(Integer idUser, Publication publication);
+	
+	void createPublicationByUserNew(Integer idUser, String publication);
 
 	void assignPublicationToUser(Publication publication, Integer idUser);
 
@@ -44,5 +47,21 @@ public interface UserManagementRemote {
 	void sharePublication(User user, Publication publication);
 
 	User login(String username, String password);
+
+	void deletePublication(Publication publication);
+
+	Publication findPublicationById(Integer id);
+
+	void updatePublication(Publication publication);
+
+	List<User> findAllUsers();
+
+	void createPhoto(Photo photo);
+
+	Photo findPhotoById(Integer id);
+
+	List<Photo> findPhotosByPublication(Integer idPub);
+
+	void deletePhotoById(Integer id);
 
 }

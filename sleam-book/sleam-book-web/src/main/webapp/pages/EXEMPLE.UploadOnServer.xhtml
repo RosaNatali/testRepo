@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"  
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui">
+	
+	<h:head>
+		<title>SLEAM-BOOK | ESPRIT</title>
+		<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+		<h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head" />
+	</h:head>
+	<h:body>
+		<ui:composition template="/templates/indexTemplate1.xhtml"
+						xmlns:p="http://primefaces.org/ui">
+						
+			<ui:define name="content">
+				
+		
+		**************************************************************
+	    <form method="post" action="UploadServlet"
+			  enctype="multipart/form-data">
+			Select file to upload: <input type="file" name="file" size="60" /><br />
+			<br /> <input type="submit" value="Upload" />
+			<br/><br/>
+		</form>
+		
+		**************************************************************
+		<h:form>
+		<p:graphicImage value="#{userBean.imageee}" width="50" height="50">
+		</p:graphicImage>
+		*****
+		<p:graphicImage value="#{userBean.image}" width="50" height="50">
+	    	<f:param name="filename" value="ss.jpg" />
+		</p:graphicImage>
+	</h:form>
+	    
+		**************************************************************
+		
+		
+				
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

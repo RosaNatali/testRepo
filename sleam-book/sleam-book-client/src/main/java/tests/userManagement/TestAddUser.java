@@ -16,9 +16,9 @@ public class TestAddUser {
 
 		User user = new User();
 		user.setId(1);
-		user.setName("salah");
-
+		user.setName("Cristiano Ronaldo");
+		user.setUsername("cristiano.ronaldo@real.com");
+		user.setPassword("HELLOWORLDCRISTIANO");
 		userManagementRemote.addUser(user);
 	}
-
 }

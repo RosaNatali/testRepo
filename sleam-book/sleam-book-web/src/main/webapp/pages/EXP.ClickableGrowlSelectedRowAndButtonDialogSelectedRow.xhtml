@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">  
+
+<h:head>
+
+
+
+</h:head> 
+<h:body> 
+   <h:form id="form">
+   <p:growl id="msgs" showDetail="true" />
+<!--         		$$$ <h:outputText value="#{userBean.selectedPublication.title}" id="hihi"/> -->
+    <p:dataTable id="aa" var="car" value="#{userBean.lps}" selection="#{userBean.selectedPublication}"
+    					  selectionMode="single" rowKey="#{car.id}"
+    					   tableStyleClass="table table-striped"
+    					   
+    					   
+    					   rowIndexVar="rowIndex"  widgetVar="datatableVar">
+    					   
+    					   <p:ajax event="rowSelect" listener="#{userBean.onRowSelect}" update=":form:msgs" />
+        <f:facet name="header">
+            Basic
+        </f:facet>
+        
+        
+        <p:column headerText="Id mm">
+            <h:outputText value="#{car.id}" />
+        </p:column>
+        <p:column headerText="Year">
+            <h:outputText value="#{car.title}" />
+        </p:column>
+        <p:column style="width:32px;text-align: center">
+             <p:commandButton update=":form:carDetail" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">
+                <f:setPropertyActionListener value="#{car}" target="#{userBean.selectedPublication}" />
+            </p:commandButton>
+        </p:column>
+    </p:dataTable>
+ 
+    <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+        <p:outputPanel id="carDetail" style="text-align:center;">
+            
+ 
+                <h:outputText value="Id:" />
+                <h:outputText value="#{userBean.selectedPublication.id}" />
+ 
+                <h:outputText value="Year" />
+                <h:outputText value="#{userBean.selectedPublication.title}" />
+ 
+        </p:outputPanel>
+    </p:dialog>
+ 
+    
+</h:form>
+</h:body> 
+</html>

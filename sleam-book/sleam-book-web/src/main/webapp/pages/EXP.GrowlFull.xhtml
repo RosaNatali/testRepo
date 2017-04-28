@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"  
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui">
+	
+	<h:head>
+		<title>SLEAM-BOOK | ESPRIT</title>
+		<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+		<h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head" />
+	</h:head>
+	<h:body>
+		<ui:composition template="/templates/indexTemplate1.xhtml"
+						xmlns:p="http://primefaces.org/ui">
+						
+			<ui:define name="content">
+				<f:view encoding="UTF-8" contentType="text/html">
+					<style>
+						.outputTooltip {
+							color: #2F3030;
+							font-family: Arial;
+							font-size: 10px;
+							font-weight: bold;
+						}
+					</style>
+		
+					<h:form id="form">
+   <p:growl id="msgs" showDetail="true" />
+<!--         		$$$ <h:outputText value="#{userBean.selectedPublication.title}" id="hihi"/> -->
+ 
+		   <p:commandButton value="Log In"
+							action="#{userBean.hello()}"
+							ajax="false"/>
+    
+</h:form>
+					
+				</f:view>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>
