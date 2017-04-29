@@ -9,7 +9,7 @@ class SaveImageToDatabase
     {
 		System.out.println("***********************************1");
 		Connection connection = null;
-		String connectionURL = "jdbc:mysql://localhost:3306/sleamdb";
+		String connectionURL = "jdbc:mysql://localhost:3306/myFirstDataBasee";
 		System.out.println("***********************************2");
         ResultSet rs = null;
         PreparedStatement psmnt = null;

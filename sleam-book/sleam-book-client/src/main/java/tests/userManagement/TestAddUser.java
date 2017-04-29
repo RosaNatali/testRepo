@@ -13,9 +13,8 @@ public class TestAddUser {
 		Context context = new InitialContext();
 		UserManagementRemote userManagementRemote = (UserManagementRemote) context
 				.lookup("sleam-book-ear/sleam-book-ejb/UserManagement!services.userManagement.UserManagementRemote");
-
 		User user = new User();
-		user.setId(1);
+		user.setId(2);
 		user.setName("Cristiano Ronaldo");
 		user.setUsername("cristiano.ronaldo@real.com");
 		user.setPassword("HELLOWORLDCRISTIANO");

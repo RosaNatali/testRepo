@@ -142,7 +142,7 @@
 
 					</p:dataTable>
 
-					<p:dialog header="Consult Publication" widgetVar="carDialog"
+					<p:dialog header="Update Publication" widgetVar="carDialog"
 						modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 						<p:outputPanel id="carDetail" style="text-align:center;">
 							<center>
@@ -217,7 +217,7 @@
 								</table>
 
 							</center>
-
+							<hr/>
 							<h:panelGrid columns="3">
 								<h:outputText value="Reference:"
 									style="color:#0000e6;font-size: 13px" />
@@ -249,10 +249,10 @@
 									<p:spacer width="25px" />
 								</p:column>
 								<p:inputTextarea value="#{userBean.selectedPublication.title}"
-									rows="10" cols="25" style="font-size: 11px" />
+									rows="10" cols="25" style="font-size: 11px" autoResize="false"/>
 							</h:panelGrid>
 							<br />
-							<hr />
+							
 
 							<center>
 								<p:commandButton value="Update"

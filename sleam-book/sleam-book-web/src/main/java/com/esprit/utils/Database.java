@@ -12,7 +12,7 @@ public class Database {
     public static Connection getConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sleamdb",
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/myFirstDataBasee",
                     "root", "root");
             return con;
         } catch (Exception ex) {
