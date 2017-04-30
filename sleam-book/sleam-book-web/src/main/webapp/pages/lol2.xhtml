@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head> 
+<h:body> 
+	<h:form>
+		<p:dataTable id="aa" var="car" value="#{userBean.listPhotos(1)}"
+						selection="#{userBean.selectedPhoto}" selectionMode="single"
+						rowKey="#{car.photoId}" tableStyleClass="table table-striped"
+						rowIndexVar="rowIndex" widgetVar="datatableVar">
+						<p:ajax event="rowSelect" oncomplete="PF('carDialog').show()"
+							update="@([id$=carDetail])" />
+						<f:facet name="header">
+           					List of publications
+        				</f:facet>
+						<p:column headerText="Reference"
+							style="text-align:center;width:100px">
+							<h:outputText value="#{car.photoId}"
+								style="font-size: 13px" />
+						</p:column>
+
+						<p:column headerText="Photo" style="text-align:center;width:100px">
+							<h:outputLink value="DisplayPhoto?Image_id=#{car.photoId}"
+												target="_blank">
+												<h:graphicImage
+													value="DisplayPhoto?Image_id=#{car.photoId}" width="200"
+													height="100">
+													
+													</h:graphicImage>
+													
+											</h:outputLink>
+						</p:column>
+
+
+					</p:dataTable>
+	
+		<p:dialog id="jjjjjj" header="Consult Publication"
+						widgetVar="carDialog" modal="true" showEffect="fade"
+						hideEffect="fade" resizable="false">
+						<p:outputPanel id="carDetail" style="text-align:center;">
+
+							<p:column>
+
+								
+									<p:column>
+										** #{userBean.selectedPhoto.photoId} **
+									</p:column>
+
+								
+
+							</p:column>
+
+
+							
+						</p:outputPanel>
+					</p:dialog>
+					
+					
+					<br/> <br/> <br/>
+					<hr/>
+					<br/> <br/> <br/>
+					
+					
+					<center>
+					<p:carousel id="carouselA"
+										value="#{userBean.listPhotos(userBean.lps.get(userBean.lps.size()-1).id)}"
+										var="item" paginator="true" numVisible="1"
+										easing="easeOutBounce" style="width:200px;height:200px"
+										cricular="true" styleClass="img"
+										paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="3,5,10" widgetVar="50"
+										
+										selection="#{userBean.selectedPhoto}" selectionMode="single"
+										rowKey="#{item.photoId}">
+
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="Image" />
+											</f:facet>
+											<h:outputLink value="DisplayPhoto?Image_id=#{item.photoId}"
+												target="_blank">
+												<h:graphicImage
+													value="DisplayPhoto?Image_id=#{item.photoId}" width="200"
+													height="100">
+													
+													</h:graphicImage>
+													
+											</h:outputLink>
+											<p:commandButton value="Expand" update="@([id$=expanded])" oncomplete="PF('lolp').show()">
+							 					<f:setPropertyActionListener value="#{item}" target="#{userBean.selectedPhoto}"></f:setPropertyActionListener>
+							 				</p:commandButton>
+										</p:column>
+							
+							
+									</p:carousel>
+									
+									<p:dialog id="wowowow" header=""
+											  widgetVar="lolp" modal="true" showEffect="fade"
+											  hideEffect="clip" resizable="false">
+									<p:outputPanel id="expanded" style="text-align:center;">
+										
+										
+										
+										<h:outputLink value="DisplayPhoto?Image_id=#{userBean.selectedPhoto.photoId}"
+												target="_blank">
+												<h:graphicImage
+													value="DisplayPhoto?Image_id=#{userBean.selectedPhoto.photoId}" width="500"
+													height="500">
+													
+													</h:graphicImage>
+													
+											</h:outputLink>
+										
+									</p:outputPanel>
+								</p:dialog>
+									
+	
+	</center>
+	
+	</h:form>
+</h:body> 
+</html>

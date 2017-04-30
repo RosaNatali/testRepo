@@ -1,251 +1,255 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
-
-<h:head>
-	<title>SLEAM-BOOK | ESPRIT</title>
-	<h:outputScript library="primefaces" name="jquery/jquery.js"
-		target="head" />
-	<h:outputScript library="primefaces" name="jquery/jquery-plugins.js"
-		target="head" />
-</h:head>
-<h:body>
-	<ui:composition template="/templates/indexTemplate1.xhtml"
-		xmlns:p="http://primefaces.org/ui">
-
-		<ui:define name="content">
-			<f:view encoding="UTF-8" contentType="text/html">
-				<style>
-.outputTooltip {
-	color: #2F3030;
-	font-family: Arial;
-	font-size: 10px;
-	font-weight: bold;
-}
-</style>
-				<h:form id="form" enctype="multipart/form-data">
-
-					<p:growl id="msgs" showDetail="false" />
-					<br />
-
-					<h:outputText value="Add a Publication" style="font-weight:bold;"
-						styleClass="text-primary" />
-					<br />
-					<br />
-					<table width="100%">
-						<tr>
-							<td width="70%" valign="top"><p:inputTextarea
-									value="#{userBean.publicationContent}" id="keyword"
-									class="form-control" style="font-size: 13px;height:150px"
-									autoResize="false" /> <p:watermark for="keyword"
-									value="What do you think ?." /> <br /></td>
-							<td width="20%" valign="top">
-
-								<center>
-									<p:commandButton value="Add" ajax="false"
-										styleClass="btn btn-primary"
-										actionListener="#{userBean.createP(userBean.connectedUser.id)}" />
-									<br />
-									<br />
-									<p:fileUpload rendered="#{userBean.lps.size()!=0}"
-										value="#{userBean.photo}" mode="simple"
-										allowTypes="/(\.|\/)(gif|jpe?g|png)$/" skinSimple="true" />
-
-									<br />
-									<br />
-									<h:panelGrid columns="2" rendered="#{userBean.lps.size()!=0}">
-										<p:column>
-											<p:commandButton value="+" ajax="false" id="add"
-												styleClass="btn btn-success"
-												actionListener="#{userBean.uploadPhotoNew()}" />
-											<p:tooltip id="toolTipAdd" for="add" value="Add"
-												showEffect="clip" hideEffect="fade" position="top"
-												styleClass="outputTooltip" />
-										</p:column>
-
-
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<title>SLEAM-BOOK | ESPRIT</title>
+		<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+		<h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head" />
+	</h:head>
+	<h:body>
+		<ui:composition template="/templates/indexTemplate1.xhtml"
+						xmlns:p="http://primefaces.org/ui">
+			<ui:define name="content">
+				<f:view encoding="UTF-8" contentType="text/html">
+					<style>
+						.outputTooltip {
+							color: #2F3030;
+							font-family: Arial;
+							font-size: 10px;
+							font-weight: bold;
+						}
+					</style>
+					<h:form id="form" enctype="multipart/form-data">
+						<p:growl id="msgs" showDetail="false" />
+						<br/>
+						<h:outputText value="Add a Publication" style="font-weight:bold;" styleClass="text-primary" />
+						<br/>
+						<br/>
+						<table width="100%">
+							<tr>
+								<td width="70%" valign="top">
+									<p:inputTextarea value="#{userBean.publicationContent}"
+													 id="keyword"
+													 class="form-control" 
+													 style="font-size: 13px;height:150px"
+													 autoResize="false" /> 
+										<p:watermark for="keyword"
+													 value="What do you think ?." /> 
+									<br/>
+								</td>
+								<td width="20%" valign="top">
+									<center>
+										<p:commandButton value="Add"
+														 ajax="false"
+														 styleClass="btn btn-primary"
+														 actionListener="#{userBean.createP(userBean.connectedUser.id)}" />
+										<br/>
+										<br/>
+										<p:fileUpload rendered="#{userBean.lps.size()!=0}"
+													  value="#{userBean.photo}"
+													  mode="simple"
+													  allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+													  skinSimple="true"/>
+										<br/>
+										<br/>
+										<h:panelGrid columns="2" rendered="#{userBean.lps.size()!=0}">
+											<p:column>
+												<p:commandButton value="+" 
+																 ajax="false" 
+																 id="add"
+															 	 styleClass="btn btn-success"
+																 actionListener="#{userBean.uploadPhotoNew()}" />
+												<p:tooltip id="toolTipAdd" 
+														   for="add" 
+														   value="Add"
+														   showEffect="clip"
+														   hideEffect="fade"
+														   position="top"
+														   styleClass="outputTooltip" />
+											</p:column>
+										</h:panelGrid>
+									</center>
+								</td>
+								<td width="30%" valign="top">
+									<h:panelGrid rendered="#{userBean.lps.size()!=0}">
+										<p:carousel id="carouselA"
+													value="#{userBean.listPhotos(userBean.lps.get(userBean.lps.size()-1).id)}"
+													var="item" 
+													paginator="true" 
+													numVisible="1"
+													easing="easeOutBounce" 
+													style="width:200px;height:178px"
+													cricular="true" 
+													styleClass="img"
+													paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+													rowsPerPageTemplate="3,5,10"
+													widgetVar="50">
+											<p:column>
+												<f:facet name="header">
+													<h:outputText value="Image" />
+												</f:facet>
+												<h:outputLink value="DisplayPhoto?Image_id=#{item.photoId}" target="_blank">
+													<h:graphicImage value="DisplayPhoto?Image_id=#{item.photoId}" 
+																	width="200"
+																	height="100" 
+																	onclick="PF('lola').show()">
+													</h:graphicImage>
+												</h:outputLink>
+												<p:commandButton value="Expand" update="@([id$=expanded])" oncomplete="PF('lolp').show()">
+								 					<f:setPropertyActionListener value="#{item}" target="#{userBean.selectedPhoto}"></f:setPropertyActionListener>
+								 				</p:commandButton>
+											</p:column>
+										    <p:dialog id="se" header="Confirmation" widgetVar="lola" dynamic="true" style="font-size: 15px;color: #400040;">
+												<h:outputLink value="DisplayPhoto?Image_id=#{item.photoId}"
+														   target="_blank">
+											 		<h:graphicImage value="DisplayPhoto?Image_id=#{item.photoId}" 
+											 						width="300"
+																	height="300">
+													</h:graphicImage>
+											 	</h:outputLink>
+										    </p:dialog>
+										</p:carousel>
 									</h:panelGrid>
-
-								</center>
-							</td>
-
-
-
-							<td width="30%" valign="top"><h:panelGrid
-									rendered="#{userBean.lps.size()!=0}">
-									<p:carousel id="carouselA"
-										value="#{userBean.listPhotos(userBean.lps.get(userBean.lps.size()-1).id)}"
-										var="item" paginator="true" numVisible="1"
-										easing="easeOutBounce" style="width:200px;height:150px"
-										cricular="true"
-										paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-										rowsPerPageTemplate="3,5,10" widgetVar="50">
-
-
-
+								</td>
+							</tr>
+						</table>
+						<hr/>
+						<h:outputText value="List of Publications" style="font-weight:bold;" styleClass="text-primary" />
+						<br/>
+						<br/>
+						<p:dataTable id="aa" 
+									 var="car" 
+									 value="#{userBean.lps}"
+									 selection="#{userBean.selectedPublication}" 
+									 selectionMode="single"
+									 rowKey="#{car.id}" 
+									 tableStyleClass="table table-striped"
+									 rowIndexVar="rowIndex" 
+									 widgetVar="datatableVar">
+							<p:ajax event="rowSelect" oncomplete="PF('carDialog').show()" update="@([id$=carDetail])" />
+							<f:facet name="header">
+	           					List of publications
+	        				</f:facet>
+							<p:column headerText="Reference" style="text-align:center;width:100px">
+								<h:outputText value="CU.#{userBean.connectedUser.id}PUB.#{car.id}" style="font-size: 13px" />
+							</p:column>
+							<p:column headerText="Photo" style="text-align:center;width:100px">
+								<f:facet name="header">
+									<h:outputText value="Image" />
+								</f:facet>
+								<p:column headerText="Thought">
+									<h:outputText value="#{car.title}" style="font-size: 13px" />
+								</p:column>
+							</p:column>
+						</p:dataTable>
+						
+						<p:dialog id="jjjjjj" 
+								  header="Consult Publication"
+								  widgetVar="carDialog" 
+								  modal="true" 
+								  showEffect="fade"
+								  hideEffect="fade" 
+								  resizable="false">
+							<p:outputPanel id="carDetail" style="text-align:center;">
+								<p:column>
+									<p:dataGrid id="carouselB"
+												value="#{userBean.listPhotos(userBean.selectedPublication.id)}"
+												var="lol" numVisible="1" easing="easeOutBounce"
+												style="width:170px;height:150px" rowsPerPageTemplate="3,5,10"
+												widgetVar="80">
 										<p:column>
 											<f:facet name="header">
 												<h:outputText value="Image" />
 											</f:facet>
-											<h:outputLink value="DisplayPhoto?Image_id=#{item.photoId}"
-												target="_blank">
-												<h:graphicImage
-													value="DisplayPhoto?Image_id=#{item.photoId}" width="200"
-													height="100"></h:graphicImage>
+											<h:outputLink value="DisplayPhoto?Image_id=#{lol.photoId}" target="_blank">
+												<h:graphicImage value="DisplayPhoto?Image_id=#{lol.photoId}" width="50" height="50"></h:graphicImage>
 											</h:outputLink>
 										</p:column>
-
-									</p:carousel>
-								</h:panelGrid></td>
-
-
-						</tr>
-					</table>
-
-
-
-					<br />
-					<br />
-					<hr />
-					<h:outputText value="List of Publications"
-						style="font-weight:bold;" styleClass="text-primary" />
-					<br />
-					<br />
-
-					<p:dataTable id="aa" var="car" value="#{userBean.lps}"
-						selection="#{userBean.selectedPublication}" selectionMode="single"
-						rowKey="#{car.id}" tableStyleClass="table table-striped"
-						rowIndexVar="rowIndex" widgetVar="datatableVar">
-						<p:ajax event="rowSelect" oncomplete="PF('carDialog').show()"
-							update="@([id$=carDetail])" />
-						<f:facet name="header">
-           					List of publications
-        				</f:facet>
-						<p:column headerText="Reference"
-							style="text-align:center;width:100px">
-							<h:outputText
-								value="CU.#{userBean.connectedUser.id}PUB.#{car.id}"
-								style="font-size: 13px" />
-						</p:column>
-
-						<p:column headerText="Photo" style="text-align:center;width:100px">
-							<f:facet name="header">
-								<h:outputText value="Image" />
-							</f:facet>
-							<p:column headerText="Thought">
-								<h:outputText value="#{car.title}" style="font-size: 13px" />
-							</p:column>
-
-						</p:column>
-
-
-					</p:dataTable>
-
-					<p:dialog id="jjjjjj" header="Consult Publication"
-						widgetVar="carDialog" modal="true" showEffect="fade"
-						hideEffect="fade" resizable="false">
-						<p:outputPanel id="carDetail" style="text-align:center;">
-
-							<p:column>
-
-								<p:dataGrid id="carouselB"
-									value="#{userBean.listPhotos(userBean.selectedPublication.id)}"
-									var="lol" numVisible="1" easing="easeOutBounce"
-									style="width:170px;height:150px" rowsPerPageTemplate="3,5,10"
-									widgetVar="80">
-
-
-
+									</p:dataGrid>
+								</p:column>
+								<h:panelGrid columns="3">
+									<h:outputText value="Reference:" style="color:#0000e6;font-size: 13px" />
 									<p:column>
-										<f:facet name="header">
-											<h:outputText value="Image" />
-										</f:facet>
-										<h:outputLink value="DisplayPhoto?Image_id=#{lol.photoId}"
-											target="_blank">
-											<h:graphicImage value="DisplayPhoto?Image_id=#{lol.photoId}"
-												width="50" height="50"></h:graphicImage>
-										</h:outputLink>
+										<h:outputText value="" style="width:5px" />
+										<p:spacer width="25px" />
 									</p:column>
-
-								</p:dataGrid>
-
-							</p:column>
-
-
-							<h:panelGrid columns="3">
-								<h:outputText value="Reference:"
-									style="color:#0000e6;font-size: 13px" />
-								<p:column>
-									<h:outputText value="" style="width:5px" />
-									<p:spacer width="25px" />
-								</p:column>
-								<h:outputText
-									value="CU.#{userBean.connectedUser.id}PUB.#{userBean.selectedPublication.id}"
-									style="font-size: 11px" />
-
-								<h:outputText value="Thought:"
-									style="color:#0000e6;font-size: 13px" />
-								<p:column>
-									<h:outputText value="" style="width:5px" />
-									<p:spacer width="25px" />
-								</p:column>
-								<h:outputText value="#{userBean.selectedPublication.title}"
-									style="font-size: 11px" />
-							</h:panelGrid>
+									<h:outputText value="CU.#{userBean.connectedUser.id}PUB.#{userBean.selectedPublication.id}" style="font-size: 11px" />
+									<h:outputText value="Thought:" style="color:#0000e6;font-size: 13px" />
+									<p:column>
+										<h:outputText value="" style="width:5px" />
+										<p:spacer width="25px" />
+									</p:column>
+									<h:outputText value="#{userBean.selectedPublication.title}" style="font-size: 11px" />
+								</h:panelGrid>
+								<br />
+								<center>
+									<p:commandButton value="Delete"
+													 oncomplete="PF('deleteDialog').show()"
+													 style="width: 80px;height: 25px;font-size: 13px;background-color: #0066ff;color:#000000;border-color:#0066ff" />
+								</center>
+								<br />
+							</p:outputPanel>
+						</p:dialog>
+						<hr />
+						<p:dialog id="thirdDialog" header="Delete Publication"
+							widgetVar="deleteDialog" modal="true" showEffect="fade"
+							hideEffect="fade" resizable="false">
+	
 							<br />
+	
+							<h:outputText
+								value="Are you sure that you want to delete this publication ?."
+								style="font-size: 13px;color: #400040;" />
+							<br />
+							<hr />
 							<center>
-								<p:commandButton value="Delete"
-									oncomplete="PF('deleteDialog').show()"
-									style="width: 80px;height: 25px;font-size: 13px;background-color: #0066ff;color:#000000;border-color:#0066ff" />
+								<p:commandButton value="No"
+									style="width: 50px;height: 25px;font-size: 13px;background-color: #0066ff;color:#000000;border-color:#0066ff"
+									onclick="deleteDialog.hide();" />
+								<p:commandButton value="Yes"
+									style="width: 50px;height: 25px;font-size: 13px;background-color: #0066ff;color:#000000;border-color:#0066ff"
+									actionListener="#{userBean.deletePublication(userBean.connectedUser.id,userBean.selectedPublication.id)}"
+									oncomplete="PF('deleteDialog').hide();PF('dlg2').show();" />
 							</center>
 							<br />
-						</p:outputPanel>
-					</p:dialog>
-					<hr />
-					<p:dialog id="thirdDialog" header="Delete Publication"
-						widgetVar="deleteDialog" modal="true" showEffect="fade"
-						hideEffect="fade" resizable="false">
-
-						<br />
-
-						<h:outputText
-							value="Are you sure that you want to delete this publication ?."
-							style="font-size: 13px;color: #400040;" />
-						<br />
-						<hr />
-						<center>
-							<p:commandButton value="No"
-								style="width: 50px;height: 25px;font-size: 13px;background-color: #0066ff;color:#000000;border-color:#0066ff"
-								onclick="deleteDialog.hide();" />
-							<p:commandButton value="Yes"
-								style="width: 50px;height: 25px;font-size: 13px;background-color: #0066ff;color:#000000;border-color:#0066ff"
-								actionListener="#{userBean.deletePublication(userBean.connectedUser.id,userBean.selectedPublication.id)}"
-								oncomplete="PF('deleteDialog').hide();PF('dlg2').show();" />
-						</center>
-						<br />
-					</p:dialog>
-					<p:dialog id="acvn" header="Information" widgetVar="dlg2"
-						dynamic="true" style="font-size: 15px;color: #400040;">
-						<br />
-						<h:outputText
-							value="Congratulations, this publication is being deleted .. !."
-							style="font-size: 13px;color: #400040;" />
-						<br />
-						<br />
-						<center>
-							<p:commandButton value="Ok"
-								style="width: 50px;height: 25px;font-size: 13px;background-color: #0066ff;color:#000000;border-color:#0066ff"
-								action="consultDeletePublication?faces-redirect=true" />
-						</center>
-						<br />
-						<br />
-					</p:dialog>
-				</h:form>
-			</f:view>
-		</ui:define>
-	</ui:composition>
-</h:body>
+						</p:dialog>
+						
+						<p:dialog id="acvn" 
+								  header="Information"
+								  widgetVar="dlg2"
+								  dynamic="true" 
+								  style="font-size: 15px;color: #400040;">
+							<br/>
+							<h:outputText
+								value="Congratulations, this publication is being deleted .. !."
+								style="font-size: 13px;color: #400040;" />
+							<br/>
+							<br/>
+							<center>
+								<p:commandButton value="Ok"
+												 style="width: 50px;height: 25px;font-size: 13px;background-color: #0066ff;color:#000000;border-color:#0066ff"
+												 action="consultDeletePublication?faces-redirect=true" />
+							</center>
+							<br/>
+							<br/>
+						</p:dialog>
+					
+						<p:dialog id="wowowow" header=""
+								  widgetVar="lolp" modal="true" showEffect="fade"
+								  hideEffect="clip" resizable="false">
+							<p:outputPanel id="expanded" style="text-align:center;">
+								<h:outputLink value="DisplayPhoto?Image_id=#{userBean.selectedPhoto.photoId}"
+											  target="_blank">
+									<h:graphicImage value="DisplayPhoto?Image_id=#{userBean.selectedPhoto.photoId}" width="500" height="500"/>
+								</h:outputLink>
+							</p:outputPanel>
+						</p:dialog>
+					</h:form>
+				</f:view>
+			</ui:define>
+		</ui:composition>
+	</h:body>
 </html>

@@ -61,7 +61,7 @@ public class UserBean
     private String title;
     private Integer owner_id;
     private List<UploadedFile> uploadedFiles;
-    
+    private Photo selectedPhoto;
     Connection MySQLcon = null;
     Statement stmt = null;
     PreparedStatement ps;
@@ -77,6 +77,7 @@ public class UserBean
 		publication = new Publication();
 		selectedPublication = new Publication();
 		selectedCar = new Car();
+		selectedPhoto = new Photo();
 		connectedUser = new User();
 		lphs = new ArrayList<Photo>();
 		uploadedFiles = new ArrayList<UploadedFile>();
@@ -730,5 +731,17 @@ public class UserBean
 		this.uploadedFiles = uploadedFiles;
 	}
 
+
+	public Photo getSelectedPhoto() {
+		return selectedPhoto;
+	}
+
+
+	public void setSelectedPhoto(Photo selectedPhoto) {
+		this.selectedPhoto = selectedPhoto;
+	}
+
+	
+	
 	
 }

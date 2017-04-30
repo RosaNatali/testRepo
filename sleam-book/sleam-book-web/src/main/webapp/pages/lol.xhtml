@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head> 
+<h:body> 
+	<h:form>
+		<p:dataTable id="aa" var="car" value="#{userBean.lps}"
+						selection="#{userBean.selectedPublication}" selectionMode="single"
+						rowKey="#{car.id}" tableStyleClass="table table-striped"
+						rowIndexVar="rowIndex" widgetVar="datatableVar">
+						<p:ajax event="rowSelect" oncomplete="PF('carDialog').show()"
+							update="@([id$=carDetail])" />
+						<f:facet name="header">
+           					List of publications
+        				</f:facet>
+						<p:column headerText="Reference"
+							style="text-align:center;width:100px">
+							<h:outputText
+								value="CU.#{userBean.connectedUser.id}PUB.#{car.id}"
+								style="font-size: 13px" />
+						</p:column>
+
+						<p:column headerText="Photo" style="text-align:center;width:100px">
+							<f:facet name="header">
+								<h:outputText value="Image" />
+							</f:facet>
+							<p:column headerText="Thought">
+								<h:outputText value="#{car.title}" style="font-size: 13px" />
+							</p:column>
+
+						</p:column>
+
+
+					</p:dataTable>
+	
+		<p:dialog id="jjjjjj" header="Consult Publication"
+						widgetVar="carDialog" modal="true" showEffect="fade"
+						hideEffect="fade" resizable="false">
+						<p:outputPanel id="carDetail" style="text-align:center;">
+
+							<p:column>
+
+								<p:dataGrid id="carouselB"
+									value="#{userBean.listPhotos(userBean.selectedPublication.id)}"
+									var="lol" numVisible="1" easing="easeOutBounce"
+									style="width:170px;height:150px" rowsPerPageTemplate="3,5,10"
+									widgetVar="80">
+
+
+
+									<p:column>
+										<f:facet name="header">
+											<h:outputText value="Image" />
+										</f:facet>
+										<h:outputLink value="DisplayPhoto?Image_id=#{lol.photoId}"
+											target="_blank">
+											<h:graphicImage value="DisplayPhoto?Image_id=#{lol.photoId}"
+												width="50" height="50"></h:graphicImage>
+										</h:outputLink>
+									</p:column>
+
+								</p:dataGrid>
+
+							</p:column>
+
+
+							<h:panelGrid columns="3">
+								<h:outputText value="Reference:"
+									style="color:#0000e6;font-size: 13px" />
+								<p:column>
+									<h:outputText value="" style="width:5px" />
+									<p:spacer width="25px" />
+								</p:column>
+								<h:outputText
+									value="CU.#{userBean.connectedUser.id}PUB.#{userBean.selectedPublication.id}"
+									style="font-size: 11px" />
+
+								<h:outputText value="Thought:"
+									style="color:#0000e6;font-size: 13px" />
+								<p:column>
+									<h:outputText value="" style="width:5px" />
+									<p:spacer width="25px" />
+								</p:column>
+								<h:outputText value="#{userBean.selectedPublication.title}"
+									style="font-size: 11px" />
+							</h:panelGrid>
+							<br />
+							<center>
+								<p:commandButton value="Delete"
+									oncomplete="PF('deleteDialog').show()"
+									style="width: 80px;height: 25px;font-size: 13px;background-color: #0066ff;color:#000000;border-color:#0066ff" />
+							</center>
+							<br />
+						</p:outputPanel>
+					</p:dialog>
+	</h:form>
+</h:body> 
+</html>
